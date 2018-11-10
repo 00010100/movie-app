@@ -1,27 +1,51 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import ReactTooltip from 'react-tooltip';
 
 import Spinner from 'components/Spinner/Spinner';
+import Pagination from 'components/Pagination/Pagination';
 import Movie from 'components/Movie/Movie';
 import ApiService from 'utils/api';
-import { getMovies } from 'actions';
+import { getMovies, changePage } from 'actions';
 
 import './Movies.scss';
 
 @connect(
   (state) => ({
     movies: state.movies.movies,
+    currentPage: state.movies.currentPage,
+    totalPage: state.movies.totalPage,
+    totalResults: state.movies.totalResults,
   }),
-  { getMovies },
+  { getMovies, changePage },
 )
 class Movies extends Component {
   apiService = new ApiService();
 
+  state = {
+    loading: false,
+    activePage: this.props.currentPage,
+  };
+
   componentDidMount() {
-    this.apiService.getNowPlaying().then((res) => {
-      this.props.getMovies(res);
-    });
+    this.updateMovies();
   }
+
+  componentDidUpdate(prevProps) {
+    if (this.props.currentPage !== prevProps.currentPage) {
+      this.setState({ loading: true });
+      this.updateMovies();
+    }
+  }
+
+  updateMovies = () => {
+    const { getMovies, currentPage } = this.props;
+
+    this.apiService.getNowPlaying(currentPage).then((res) => {
+      getMovies(res);
+      this.setState({ loading: false });
+    });
+  };
 
   renderMoviesList = (movies) => {
     return movies.map((movie) => {
@@ -29,10 +53,15 @@ class Movies extends Component {
     });
   };
 
-  render() {
-    const { movies } = this.props;
+  handlePageChange = (activePage) => {
+    this.setState({ activePage }, () => this.props.changePage(activePage));
+  };
 
-    if (!movies) {
+  render() {
+    const { movies, currentPage, totalResults } = this.props;
+    const { loading } = this.state;
+
+    if (!movies || loading) {
       return <Spinner />;
     }
 
@@ -40,6 +69,12 @@ class Movies extends Component {
       <div className="Movies">
         <h2>Last Releases</h2>
         <div className="Movies__grid">{this.renderMoviesList(movies)}</div>
+        <Pagination
+          currentPage={currentPage}
+          clicked={this.handlePageChange}
+          totalResults={totalResults}
+        />
+        <ReactTooltip id="movie" />
       </div>
     );
   }
