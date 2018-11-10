@@ -16,7 +16,10 @@ export default class MovieService {
   getNowPlaying = async (pageNumber) => {
     const res = await this.getResource(`/movie/now_playing`, pageNumber);
 
-    return res.results.map(this._transformMovies);
+    return {
+      ...res,
+      results: res.results.map(this._transformMovies),
+    };
   };
 
   _getPosterPath = (path) => `http://image.tmdb.org/t/p/w342${path}`;
