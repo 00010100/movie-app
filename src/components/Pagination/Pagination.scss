@@ -1,0 +1,88 @@
+.pagination {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &__item {
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    float: left;
+    text-decoration: none;
+    width: 35px;
+    height: 35px;
+    border: 1px solid #eeeeee;
+    background-color: transparent;
+
+    a {
+      color: #444;
+      font-size: 18px;
+      line-height: 35px;
+      display: block;
+      text-decoration: none;
+      font-weight: 400;
+    }
+
+    &.active {
+      a {
+        color: teal;
+        font-weight: 900;
+      }
+    }
+
+    &:hover {
+      a {
+        color: teal;
+      }
+    }
+
+    &.first,
+    &.last,
+    &.prev,
+    &.next {
+      width: auto;
+      height: auto;
+      padding: 0 20px;
+    }
+
+    &.first,
+    &.last {
+      a {
+        color: teal;
+      }
+      &:hover {
+        a {
+          color: darken(teal, 10%);
+        }
+      }
+    }
+
+    &.prev,
+    &.next {
+      a {
+        color: #444;
+      }
+      &:hover {
+        a {
+          color: teal;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .pagination {
+    &__item {
+      width: 30px;
+      height: 30px;
+    }
+  }
+  .pagination__item.first, .pagination__item.last, .pagination__item.prev, .pagination__item.next {
+    height: 30px;
+    padding: 0 10px;
+  }
+}

@@ -1,0 +1,25 @@
+.Movies {
+  padding: 30px 20px 30px;
+  position: relative;
+
+  &__title {
+    margin: 0 0 20px 10px;
+    color: gray;
+  }
+
+  &__grid {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+  }
+}
+
+.BG {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: -1;
+  opacity: 0;
+}

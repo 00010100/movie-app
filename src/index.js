@@ -3,11 +3,11 @@ import { render } from 'react-dom';
 import { Provider } from 'react-redux';
 
 import store from 'store';
-import App from 'containers/App';
+import App from 'containers/App/App';
 
 render(
   <Provider key={module.hot ? Date.now() : store} store={store}>
     <App />
   </Provider>,
-  document.getElementById('root')
+  document.getElementById('root'),
 );
