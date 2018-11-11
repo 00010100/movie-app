@@ -73,3 +73,16 @@
     }
   }
 }
+
+@media screen and (max-width: 768px) {
+  .pagination {
+    &__item {
+      width: 30px;
+      height: 30px;
+    }
+  }
+  .pagination__item.first, .pagination__item.last, .pagination__item.prev, .pagination__item.next {
+    height: 30px;
+    padding: 0 10px;
+  }
+}

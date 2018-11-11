@@ -39,6 +39,8 @@
   },
   "dependencies": {
     "@babel/polyfill": "^7.0.0",
+    "moment": "^2.22.2",
+    "prop-types": "^15.6.2",
     "react-js-pagination": "^3.0.2",
     "react-redux": "^5.0.7",
     "react-tooltip": "^3.9.0",

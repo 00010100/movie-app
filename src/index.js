@@ -9,5 +9,5 @@ render(
   <Provider key={module.hot ? Date.now() : store} store={store}>
     <App />
   </Provider>,
-  document.getElementById('root')
+  document.getElementById('root'),
 );

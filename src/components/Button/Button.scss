@@ -1,0 +1,84 @@
+.close-icon-container {
+  position: absolute;
+  z-index: 999;
+  top: calc(7% + 70px);
+  left: 5%;
+  display: flex;
+  align-items: center;
+  outline: none;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  padding: 0;
+
+  &:hover {
+    .close-icon {
+      .progress {
+        opacity: 1;
+        stroke-dasharray: 25, 120;
+      }
+    }
+  }
+
+  &:active,
+  &.clicked {
+    .close-icon {
+      .progress {
+        stroke-dasharray: 120, 120;
+      }
+    }
+  }
+
+  .close-icon {
+    display: inline-block;
+    height: 40px;
+    width: 40px;
+    cursor: pointer;
+    stroke: #fff;
+
+    &-text {
+      margin-left: 10px;
+      color: white;
+    }
+
+    .circle {
+      opacity: 0.1;
+    }
+
+    .progress {
+      opacity: 0;
+      stroke-dasharray: 0, 120;
+      transition: 0.5s cubic-bezier(0.165, 0.775, 0.145, 1.02);
+    }
+
+    &:hover {
+      .progress {
+        opacity: 1;
+        stroke-dasharray: 90, 120;
+      }
+    }
+    &:active,
+    &.clicked {
+      .progress {
+        stroke-dasharray: 120, 120;
+      }
+    }
+    &.clicked {
+      .progress {
+        opacity: 1;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .close-icon-container {
+    top: calc(3% + 70px);
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .close-icon-container {
+    top: calc(2% + 70px);
+  }
+}
