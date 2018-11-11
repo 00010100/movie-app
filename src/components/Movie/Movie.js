@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import './Movie.scss';
 
@@ -13,5 +14,10 @@ const Movie = (props) => {
     </div>
   );
 };
+
+Movie.propTypes = {
+  poster_path: PropTypes.string,
+  title: PropTypes.string,
+}
 
 export default Movie;

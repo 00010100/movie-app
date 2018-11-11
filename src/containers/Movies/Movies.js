@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import ReactTooltip from 'react-tooltip';
 
 import MovieDetails from 'components/MovieDetails/MovieDetails';
@@ -24,6 +25,13 @@ import './Movies.scss';
 )
 class Movies extends Component {
   apiService = new ApiService();
+
+  static propTypes = {
+    movies: PropTypes.array,
+    currentPage: PropTypes.number,
+    totalPage: PropTypes.number,
+    totalResults: PropTypes.number,
+  };
 
   state = {
     loading: false,

@@ -1,6 +1,11 @@
 .Header {
   width: 100%;
   background-color: #474E5A;
+  height: 70px;
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 1000;
 
   &__inner {
     display: flex;

@@ -1,12 +1,14 @@
 import React from 'react';
 
+import logo from '../../assets/logo.svg';
+
 import './Logo.scss';
 
-const Logo = (props) => {
+const Logo = () => {
   return (
     <div className="Logo">
       <div className="Logo__inner">
-        <img src="https://cdn4.iconfinder.com/data/icons/logos-3/600/React.js_logo-512.png" />
+        <img src={logo} className="Logo__img" alt="logo" />
         <span>Movies</span>
       </div>
     </div>
