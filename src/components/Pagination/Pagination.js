@@ -6,8 +6,11 @@ import './Pagination.scss';
 const CustomPagination = (props) => {
   const { currentPage, totalResults, clicked } = props;
 
+  const mq = window.matchMedia('(max-width: 480px)');
+
   return (
     <Pagination
+      hideFirstLastPages={mq.matches}
       prevPageText="Prev"
       nextPageText="Next"
       firstPageText="First"

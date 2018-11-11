@@ -1,11 +1,12 @@
 import { createReducer } from 'redux-act';
-import { getMovies, changePage } from 'actions';
+import { getMovies, changePage, getMovieDetailsById } from 'actions';
 
 const initialState = {
   movies: null,
   currentPage: 1,
   totalPages: null,
   totalResults: null,
+  movieDetails: null,
 };
 
 export default createReducer(
@@ -21,6 +22,14 @@ export default createReducer(
       ...state,
       currentPage: payload,
     }),
+    [getMovieDetailsById]: (state, payload) => {
+      const movies = state.movies;
+
+      return {
+        ...state,
+        movieDetails: movies.filter((el) => el.id === payload)[0],
+      };
+    },
   },
   initialState,
 );
