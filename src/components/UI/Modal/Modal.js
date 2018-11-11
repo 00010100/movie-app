@@ -1,10 +1,18 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
-import Icon from 'components/Icon/Icon';
+import Button from 'components/Button/Button';
 
 import './Modal.scss';
 
 export default class Modal extends Component {
+  static = {
+    children: PropTypes.objectOf(PropTypes.any),
+    show: PropTypes.bool,
+    modalClosed: PropTypes.func,
+    poster: PropTypes.string,
+  };
+
   componentDidMount() {
     document.body.classList.add('modal-open');
   }
@@ -31,9 +39,7 @@ export default class Modal extends Component {
             filter: 'blur(10px)',
           }}
         />
-        <button className="close-btn" onClick={modalClosed}>
-          <Icon name="close" />
-        </button>
+        <Button name="close" text="Back to list" clicked={modalClosed} />
         <div
           className="Modal"
           style={{

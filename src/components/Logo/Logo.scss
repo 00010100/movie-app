@@ -1,12 +1,22 @@
 .Logo {
-  img {
-    max-width: 30px;
-    margin-right: 10px;
-  }
 
   &__inner {
     display: flex;
     align-items: center;
     justify-content: center;
+  }
+
+  &__img {
+    animation: Logo-spin infinite 20s linear;
+    max-width: 40px;
+  }
+}
+
+@keyframes Logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
   }
 }

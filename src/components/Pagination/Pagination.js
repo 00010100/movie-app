@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Pagination from 'react-js-pagination';
 
 import './Pagination.scss';
@@ -27,6 +28,12 @@ const CustomPagination = (props) => {
       onChange={clicked}
     />
   );
+};
+
+CustomPagination.propTypes = {
+  currentPage: PropTypes.number,
+  totalResults: PropTypes.number,
+  clicked: PropTypes.func,
 };
 
 export default CustomPagination;

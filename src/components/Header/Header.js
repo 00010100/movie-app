@@ -5,7 +5,7 @@ import Account from 'components/Account/Account';
 
 import './Header.scss';
 
-const Header = (props) => {
+const Header = () => {
   return (
     <div className="Header">
       <div className="Header__inner">
