@@ -1,5 +1,5 @@
 import { createReducer } from 'redux-act';
-import { getMovies, changePage, getMovieDetailsById } from 'actions';
+import { getMovies, changePage, getMovieDetailsById, getRating } from 'actions';
 
 const initialState = {
   movies: null,
@@ -30,6 +30,13 @@ export default createReducer(
         movieDetails: movies.filter((el) => el.id === payload)[0],
       };
     },
+    [getRating]: (state, payload) => ({
+      ...state,
+      movieDetails: {
+        ...state.movieDetails,
+        rating: payload.rating,
+      },
+    }),
   },
   initialState,
 );

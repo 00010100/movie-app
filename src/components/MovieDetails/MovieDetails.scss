@@ -1,4 +1,6 @@
 .Details {
+  overflow: auto;
+
   &__inner {
     display: flex;
     align-items: center;
@@ -64,7 +66,6 @@
 @media screen and (max-width: 768px) {
   .Details {
     padding: 20px 0;
-    overflow: auto;
 
     &__inner {
       max-width: 90%;
