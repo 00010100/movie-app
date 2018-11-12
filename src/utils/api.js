@@ -4,7 +4,7 @@ export default class MovieService {
   _posterBase = 'http://image.tmdb.org/t/p';
   _defaultImg = require('../assets/default.jpg');
 
-  getResource = async (url, pageNumber) => {
+  getResource = async (url, pageNumber = 1) => {
     const res = await fetch(`${this._apiBase}${url}${this._apiKey}&page=${pageNumber}`);
 
     if (!res.ok) {
@@ -23,12 +23,30 @@ export default class MovieService {
     };
   };
 
+  getMovieDetails = async (id) => {
+    const res = await this.getResource(`/movie/${id}/release_dates`);
+
+    const filtered = res.results.filter(this._getRating);
+
+    if (filtered.length !== 0) {
+      return filtered.map(this._addRating)[0];
+    }
+
+    return { rating: '' };
+  };
+
+  _addRating = (rating) => {
+    return { rating: rating.release_dates[0].certification }
+  };
+
+  _getRating = (rating) => rating.iso_3166_1 === 'RU';
+
   _getPosterPath = (path, size) => {
     if (!path) {
       return this._defaultImg;
     }
 
-    return `${this._posterBase}/${size}${path}`
+    return `${this._posterBase}/${size}${path}`;
   };
 
   _transformMovies = (movie) => {
@@ -37,5 +55,5 @@ export default class MovieService {
       poster_path: this._getPosterPath(movie.poster_path, 'w342'),
       poster_bg_path: this._getPosterPath(movie.poster_path, 'original'),
     };
-  }
+  };
 }

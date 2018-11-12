@@ -4,6 +4,8 @@ import PropTypes from 'prop-types';
 import moment from 'moment';
 
 import Spinner from 'components/UI/Spinner/Spinner';
+import ApiService from 'utils/api';
+import { getRating } from 'actions';
 
 import './MovieDetails.scss';
 
@@ -11,12 +13,10 @@ import './MovieDetails.scss';
   (state) => ({
     movieDetails: state.movies.movieDetails,
   }),
-  null,
+  { getRating },
 )
 class MovieDetails extends Component {
-  state = {
-    loading: false,
-  };
+  apiService = new ApiService();
 
   static propTypes = {
     poster_path: PropTypes.string,
@@ -26,9 +26,17 @@ class MovieDetails extends Component {
     overview: PropTypes.string,
   };
 
+  componentDidMount() {
+    const { movieDetails, getRating } = this.props;
+
+    this.apiService.getMovieDetails(movieDetails.id).then((res) => {
+      getRating(res);
+    });
+  }
+
   render() {
     const {
-      movieDetails: { poster_path, title, release_date, vote_average, overview },
+      movieDetails: { poster_path, title, release_date, vote_average, overview, rating },
     } = this.props;
 
     if (!this.props.movieDetails) return <Spinner />;
@@ -45,7 +53,7 @@ class MovieDetails extends Component {
             </h1>
             <p className="Details__info">
               <span>Score: {vote_average}</span>
-              <span>Rating {}</span>
+              {rating && <span>Rating: {rating}</span>}
               <span>Release date: {moment(release_date).format('MMMM DD[,] YYYY')}</span>
             </p>
             <div className="Details__content-wrap">
